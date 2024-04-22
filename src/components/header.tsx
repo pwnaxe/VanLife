@@ -52,7 +52,11 @@ const products = [
   },
 ];
 const callsToAction = [
-  { name: "Obejrzyj Video", href: "#", icon: PlayCircleIcon },
+  {
+    name: "Obejrzyj Video",
+    href: "https://www.youtube.com/@tanosmotorsport6192",
+    icon: PlayCircleIcon,
+  },
   { name: "Telefon", href: "#", icon: PhoneIcon },
 ];
 
@@ -73,7 +77,7 @@ export default function Example() {
           <a href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">VanLife</span>
             <img
-              className="h-auto w-24"
+              className="h-auto w-14"
               src="./assets/icon.png"
               alt="VanLife"
             />

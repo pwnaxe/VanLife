@@ -1,50 +1,64 @@
 const people = [
   {
-    name: "Leslie Alexander",
+    name: "Maciej Kamiński",
     role: "Co-Founder / CEO",
-    imageUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    imageUrl: "https://i.imgur.com/LIpWU5v.png",
+    description:
+      "Maciej jest odpowiedzialny za rozwój produktu i marketing. Wcześniej pracował w branży IT, gdzie zdobył doświadczenie w zarządzaniu projektami i marketingu. W wolnych chwilach lubi podróżować i jeździć na rowerze.",
   },
-  // More people...
+  {
+    name: "Paweł Gołębiewski",
+    role: "Co-Founder / CEO",
+    imageUrl: "https://i.imgur.com/JARzkg3.png",
+    description:
+      "Paweł jest odpowiedzialny za rozwój produktu i marketing. Wcześniej pracował w branży IT, gdzie zdobył doświadczenie w zarządzaniu projektami i marketingu. W wolnych chwilach lubi podróżować i jeździć na rowerze.",
+  },
 ];
 
-export default function Example() {
+export default function TeamShow() {
   return (
     <div className="bg-white py-24 sm:py-32">
-      <div className="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3">
-        <div className="max-w-2xl">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Meet our leadership
+            Poznaj nas bliżej
           </h2>
           <p className="mt-6 text-lg leading-8 text-gray-600">
-            Libero fames augue nisl porttitor nisi, quis. Id ac elit odio vitae
-            elementum enim vitae ullamcorper suspendisse.
+            Nasz zespół łączy pasję do motoryzacji z profesjonalizmem. Jesteśmy
+            tutaj, aby pomóc Ci przekształcić Twój bus w idealny kamper.
           </p>
         </div>
-        <ul
-          role="list"
-          className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
-        >
-          {people.map((person) => (
-            <li key={person.name}>
-              <div className="flex items-center gap-x-6">
-                <img
-                  className="h-16 w-16 rounded-full"
-                  src={person.imageUrl}
-                  alt=""
-                />
-                <div>
-                  <h3 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
-                    {person.name}
-                  </h3>
-                  <p className="text-sm font-semibold leading-6 text-indigo-600">
-                    {person.role}
-                  </p>
-                </div>
+        <div className="mt-12">
+          {people.map((person, index) => (
+            <div
+              key={person.name}
+              className={`flex ${
+                index % 2 === 0 ? "flex-row" : "flex-row-reverse"
+              } items-center py-10`}
+            >
+              <img
+                className="flex-shrink-0 h-148 w-72 object-cover rounded-lg shadow-xl"
+                src={person.imageUrl}
+                alt={person.name}
+              />
+              <div
+                className={`ml-4 ${
+                  index % 2 === 0 ? "mr-auto" : "ml-auto"
+                } max-w-md`}
+              >
+                <h3 className="text-xl font-semibold leading-7 tracking-tight text-gray-900">
+                  {person.name}
+                </h3>
+                <p className="mt-1 text-lg font-semibold leading-6 text-indigo-600">
+                  {person.role}
+                </p>
+                <p className="mt-4 text-base text-gray-500">
+                  {person.description}
+                </p>
               </div>
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </div>
   );
