@@ -2,13 +2,12 @@
 import { Fragment, useState } from "react";
 import { Dialog, Disclosure, Popover, Transition } from "@headlessui/react";
 import {
-  ArrowPathIcon,
+  NewspaperIcon,
   Bars3Icon,
-  ChartPieIcon,
-  CursorArrowRaysIcon,
-  FingerPrintIcon,
-  SquaresPlusIcon,
   XMarkIcon,
+  TruckIcon,
+  WrenchScrewdriverIcon,
+  UserGroupIcon,
 } from "@heroicons/react/24/outline";
 import {
   ChevronDownIcon,
@@ -22,33 +21,28 @@ const products = [
     description:
       "Zestaw do survivalu, koło zapasowe, Twój Bus i przygoda! Brzmi nieźle? My też tak myślimy! Zobacz nasz blog i dowiedz się więcej o naszych projektach i realizacjach.",
     href: "/blog",
-    icon: ChartPieIcon,
+    icon: NewspaperIcon,
   },
   {
     name: "Nasze produkty",
     description:
       "Ale w zasadzie jak możecie mi pomóc? Zobacz nasze produkty i sam sprawdź jak możemy Ci pomóc w realizacji Twoich marzeń!",
     href: "/parts",
-    icon: CursorArrowRaysIcon,
+    icon: TruckIcon,
   },
   {
-    name: "Produkt n3",
-    description: "Modyciacje i tuning kamperów i przyczep kempingowych",
-    href: "#",
-    icon: FingerPrintIcon,
-  },
-  {
-    name: "Produkt n4",
-    description: "Modyfikacje i tuning busów i przyczep kempingowych",
-    href: "#",
-    icon: SquaresPlusIcon,
-  },
-  {
-    name: "Produkt n5",
+    name: "Usługi",
     description:
-      "Rozwiązania dla firm i osób prywatnych w zakresie kamperów i przyczep kempingowych",
-    href: "#",
-    icon: ArrowPathIcon,
+      "Chcesz kawę na ławę, bez zbędnego gadania? Lista naszych usług jest krótka i zwięzła. Zobacz co możemy dla Ciebie zrobić!",
+    href: "/services",
+    icon: WrenchScrewdriverIcon,
+  },
+  {
+    name: "Współpraca",
+    description:
+      "Masz pomysł na współpracę? Prowadzisz media społecznościowe, bloga, stronę internetową? Skontaktuj się z nami!",
+    href: "/b2b",
+    icon: UserGroupIcon,
   },
 ];
 const callsToAction = [
@@ -57,7 +51,7 @@ const callsToAction = [
     href: "https://www.youtube.com/@tanosmotorsport6192",
     icon: PlayCircleIcon,
   },
-  { name: "Telefon", href: "#", icon: PhoneIcon },
+  { name: "Telefon", href: "tel:+48571277223", icon: PhoneIcon },
 ];
 
 function classNames(...classes) {
@@ -177,7 +171,10 @@ export default function Example() {
           </a>
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+          <a
+            href="/contact"
+            className="text-sm font-semibold leading-6 text-gray-900"
+          >
             Kontakt <span aria-hidden="true">&rarr;</span>
           </a>
         </div>
@@ -236,7 +233,7 @@ export default function Example() {
                   )}
                 </Disclosure>
                 <a
-                  href="#"
+                  href="/gallery"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Galeria
@@ -256,7 +253,7 @@ export default function Example() {
               </div>
               <div className="py-6">
                 <a
-                  href="#"
+                  href="/contact"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Kontakt
