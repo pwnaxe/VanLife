@@ -72,7 +72,9 @@ export default function Gallery() {
                   <span>Brak obrazu</span>
                 </div>
               )}
-              <h3 className="mt-4 text-md text-gray-700">{gallery.title}</h3>
+              <h3 className="mt-4 text-md text-gray-700 font-bold">
+                {gallery.title}
+              </h3>
             </div>
           ))}
         </div>

@@ -71,7 +71,7 @@ export default function Example() {
           <a href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">VanLife</span>
             <img
-              className="h-auto w-14"
+              className="h-auto w-44"
               src="./assets/icon.png"
               alt="VanLife"
             />
@@ -115,7 +115,7 @@ export default function Example() {
                     >
                       <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                         <item.icon
-                          className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                          className="h-6 w-6 text-gray-600 group-hover:text-amber-500"
                           aria-hidden="true"
                         />
                       </div>
