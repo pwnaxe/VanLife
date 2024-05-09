@@ -1,10 +1,8 @@
-import Testimonial from "@/components/testimonial";
-
 export default function Home(): any {
   return (
     <>
       <main>
-        <div className="mx-auto max-w-2xl pt-32 sm:pt-38">
+        <div className="mx-auto max-w-2xl pt-32 sm:pt-38 pb-60">
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
             <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
               Współpraca biznesowa.{" "}
@@ -39,7 +37,6 @@ export default function Home(): any {
             </div>
           </div>
         </div>
-        <Testimonial />
       </main>
     </>
   );

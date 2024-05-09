@@ -18,6 +18,11 @@ interface Gallery {
   content: string;
 }
 
+interface Blog {
+  name: string;
+  content: string;
+}
+
 export async function getproducts(): Promise<Product[]> {
   const url = new URL("/api/products", baseUrl);
   const queryParameters = { populate: "*" };
@@ -70,6 +75,32 @@ export async function getgalleries(): Promise<Gallery[]> {
           : null,
     }));
     return galleries;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return [];
+  }
+}
+
+export async function getBlog(): Promise<Blog[]> {
+  const url = new URL("/api/blogs", baseUrl);
+  const queryParameters = { populate: "*" };
+  const queryString = qs.stringify(queryParameters, { encode: false });
+  url.search = queryString;
+
+  try {
+    const response = await fetch(url.href);
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    const blogs: Blog[] = data.data.map((item: any) => ({
+      ...flattenAttributes(item),
+      image:
+        item.attributes.image && item.attributes.image.data
+          ? getStrapiMedia(item.attributes.image.data.attributes.url)
+          : null,
+    }));
+    return blogs;
   } catch (error) {
     console.error("Error fetching data:", error);
     return [];

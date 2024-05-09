@@ -42,7 +42,7 @@ export default function TeamShow() {
                 alt={person.name}
               />
               <div
-                className={`ml-4 ${
+                className={`ml-16 mr-16 ${
                   index % 2 === 0 ? "mr-auto" : "ml-auto"
                 } max-w-md`}
               >

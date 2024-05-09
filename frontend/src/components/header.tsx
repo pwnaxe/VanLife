@@ -34,7 +34,7 @@ const products = [
     name: "Usługi",
     description:
       "Chcesz kawę na ławę, bez zbędnego gadania? Lista naszych usług jest krótka i zwięzła. Zobacz co możemy dla Ciebie zrobić!",
-    href: "/services",
+    href: "#",
     icon: WrenchScrewdriverIcon,
   },
   {

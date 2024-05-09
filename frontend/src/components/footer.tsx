@@ -10,7 +10,7 @@ export default function Footer() {
               <img
                 src="/assets/icon.png"
                 alt="Logo"
-                className="h-8 w-auto mr-3"
+                className="h-8 w-auto mr-3 bg-white rounded-full p-1"
               />
               <span className="self-center text-xl font-semibold whitespace-nowrap">
                 VanLife
