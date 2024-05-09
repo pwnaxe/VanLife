@@ -16,7 +16,7 @@
       "type": "string"
     },
     "price": {
-      "type": "decimal"
+      "type": "integer"
     },
     "image": {
       "type": "media",
