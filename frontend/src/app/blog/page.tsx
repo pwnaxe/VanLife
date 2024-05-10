@@ -1,7 +1,8 @@
 "use client";
-import { getBlog } from "@/utilities/loader";
+import { getBlogs } from "@/utilities/loader";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface Blog {
   id: string;
@@ -9,18 +10,17 @@ interface Blog {
   description: string;
   date: string;
   category: string;
-  author: {
-    name: string;
-    role: string;
-    image: string | null;
-  };
+  author: string;
+  image: string | null;
+  imagepost: string | null;
+  role: string;
 }
 
 export default function Blog() {
-  const [blog, setBlogs] = useState<Blog[]>([]);
+  const [blogs, setBlogs] = useState<Blog[]>([]);
   useEffect(() => {
     async function fetchData() {
-      const blogsData = await getBlog();
+      const blogsData = await getBlogs();
       setBlogs(blogsData);
     }
 
@@ -40,14 +40,14 @@ export default function Blog() {
           </p>
         </div>
         <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-          {blog.map((blog) => (
+          {blogs.map((blog) => (
             <article
               key={blog.id}
               className="flex max-w-xl flex-col items-start justify-between"
             >
               <div className="flex items-center gap-x-4 text-xs">
                 <time dateTime={blog.date} className="text-gray-500">
-                  {blog.date}
+                  {new Date(blog.date).toLocaleDateString()}
                 </time>
                 <a className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">
                   {blog.category}
@@ -68,19 +68,21 @@ export default function Blog() {
                 </p>
               </div>
               <div className="relative mt-8 flex items-center gap-x-4">
-                <img
-                  src={blog.author.image}
-                  alt=""
+                <Image
+                  src={blog.image}
+                  alt={`Image of ${blog.author}`}
+                  width={40}
+                  height={40}
                   className="h-10 w-10 rounded-full bg-gray-50"
                 />
                 <div className="text-sm leading-6">
                   <p className="font-semibold text-gray-900">
                     <a>
                       <span className="absolute inset-0" />
-                      {blog.author.name}
+                      {blog.author}
                     </a>
                   </p>
-                  <p className="text-gray-600">{blog.author.role}</p>
+                  <p className="text-gray-600">{blog.role}</p>
                 </div>
               </div>
             </article>

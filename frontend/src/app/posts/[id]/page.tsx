@@ -1,25 +1,33 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import { getBlog } from "@/utilities/loader";
+import {
+  BlocksRenderer,
+  type BlocksContent,
+} from "@strapi/blocks-react-renderer";
 
 interface Blog {
   id: string;
   title: string;
+  description: string;
+  date: string;
+  category: string;
   author: string;
-  img?: string;
-  text?: string; // Założenie, że pole 'text' zawiera treść bloga
+  image: string | null;
+  post: string;
+  imagepost: string | null;
+  role: string;
+  content?: BlocksContent;
 }
 
-interface ArticleProps {
+interface BlogProps {
   params: {
     id: string;
   };
 }
 
-export default function Article({ params }: ArticleProps) {
+export default function Blog({ params }: BlogProps) {
   const [blog, setBlog] = useState<Blog | null>(null);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -29,47 +37,74 @@ export default function Article({ params }: ArticleProps) {
         console.error("Error fetching blog:", error);
       }
     };
+
     fetchData();
   }, [params.id]);
 
   if (!blog) {
-    return <div>Loading...</div>;
+    return <p>Loading...</p>;
   }
 
   return (
     <div className="relative isolate overflow-hidden bg-white px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
-      <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-start lg:gap-y-10">
-        <div className="col-span-2 col-start-1 row-start-1 mx-auto grid w-full max-w-7xl grid-cols-2 gap-x-8 px-8">
-          <div className="pr-4">
-            <div className="max-w-lg">
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <svg
+          className="absolute left-[max(50%,25rem)] top-0 h-[64rem] w-[128rem] -translate-x-1/2 stroke-gray-200 [mask-image:radial-gradient(64rem_64rem_at_top,white,transparent)]"
+          aria-hidden="true"
+        >
+          <defs>
+            <pattern
+              id="e813992c-7d03-4cc4-a2bd-151760b470a0"
+              width={200}
+              height={200}
+              x="50%"
+              y={-1}
+              patternUnits="userSpaceOnUse"
+            >
+              <path d="M100 200V.5M.5 .5H200" fill="none" />
+            </pattern>
+          </defs>
+          <svg x="50%" y={-1} className="overflow-visible fill-gray-50">
+            <path
+              d="M-100.5 0h201v201h-201Z M699.5 0h201v201h-201Z M499.5 400h201v201h-201Z M-300.5 600h201v201h-201Z"
+              strokeWidth={0}
+            />
+          </svg>
+          <rect
+            width="100%"
+            height="100%"
+            strokeWidth={0}
+            fill="url(#e813992c-7d03-4cc4-a2bd-151760b470a0)"
+          />
+        </svg>
+      </div>
+      <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-start lg:gap-y-10">
+        <div className="lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
+          <div className="lg:pr-4">
+            <div className="lg:max-w-lg">
               <p className="text-base font-semibold leading-7 text-amber-500">
                 {blog.title}
               </p>
               <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                {blog.title}
+                {blog.author}
               </h1>
               <p className="mt-6 text-xl leading-8 text-gray-700">
-                Autor: {blog.author}
+                {blog.description}
               </p>
             </div>
           </div>
         </div>
-        {blog.img && (
-          <div className="-ml-12 -mt-12 p-12 sticky top-4 col-start-2 row-span-2 row-start-1 overflow-hidden">
-            <Image
-              src={blog.img}
-              alt={blog.title}
-              width={480}
-              height={320}
-              className="max-w-none rounded-xl bg-gray-900 shadow-xl ring-1 ring-gray-400/10"
-              priority
-            />
-          </div>
-        )}
-        <div className="col-span-2 col-start-1 row-start-2 mx-auto grid w-full max-w-7xl grid-cols-2 gap-x-8 px-8">
-          <div className="pr-4">
+        <div className="-ml-12 -mt-12 p-12 lg:sticky lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden">
+          <img
+            className="w-[48rem] max-w-none rounded-xl bg-gray-900 shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem]"
+            src={blog.imagepost}
+            alt={blog.title}
+          />
+        </div>
+        <div className="lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
+          <div className="lg:pr-4">
             <div className="max-w-xl text-base leading-7 text-gray-700 lg:max-w-lg">
-              <p>{blog.text}</p> {/* Wyświetlanie treści bloga */}
+              <BlocksRenderer content={blog.post} />
             </div>
           </div>
         </div>

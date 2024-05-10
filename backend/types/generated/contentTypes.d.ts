@@ -804,8 +804,11 @@ export interface ApiBlogBlog extends Schema.CollectionType {
     description: Attribute.Text;
     date: Attribute.DateTime;
     category: Attribute.String;
-    author: Attribute.Component<'author.author'>;
-    post: Attribute.Component<'post.post'>;
+    author: Attribute.String;
+    role: Attribute.String;
+    image: Attribute.Media;
+    imagepost: Attribute.Media;
+    post: Attribute.Blocks;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

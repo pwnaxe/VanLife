@@ -81,7 +81,7 @@ export async function getgalleries(): Promise<Gallery[]> {
   }
 }
 
-export async function getBlog(): Promise<Blog[]> {
+export async function getBlogs(): Promise<Blog[]> {
   const url = new URL("/api/blogs", baseUrl);
   const queryParameters = { populate: "*" };
   const queryString = qs.stringify(queryParameters, { encode: false });
@@ -99,10 +99,44 @@ export async function getBlog(): Promise<Blog[]> {
         item.attributes.image && item.attributes.image.data
           ? getStrapiMedia(item.attributes.image.data.attributes.url)
           : null,
+      imagepost:
+        item.attributes.image && item.attributes.image.data
+          ? getStrapiMedia(item.attributes.image.data.attributes.url)
+          : null,
     }));
     return blogs;
   } catch (error) {
     console.error("Error fetching data:", error);
     return [];
+  }
+}
+
+export async function getBlog(BlogId: string): Promise<Blog | null> {
+  const url = new URL(`/api/blogs/${BlogId}`, baseUrl);
+  const queryParameters = { populate: "*" };
+  const queryString = qs.stringify(queryParameters, { encode: false });
+  url.search = queryString;
+
+  try {
+    const response = await fetch(url.href);
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    const blog: Blog = {
+      ...flattenAttributes(data.data),
+      image:
+        data.data.attributes.image && data.data.attributes.image.data
+          ? getStrapiMedia(data.data.attributes.image.data.attributes.url)
+          : null,
+      imagepost:
+        data.data.attributes.imagepost && data.data.attributes.imagepost.data
+          ? getStrapiMedia(data.data.attributes.imagepost.data.attributes.url)
+          : null,
+    };
+    return blog;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return null;
   }
 }
