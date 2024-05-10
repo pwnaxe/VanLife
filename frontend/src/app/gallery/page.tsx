@@ -7,16 +7,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-cards";
 import { EffectCards } from "swiper/modules";
-
-interface Gallery {
-  id: string;
-  title: string;
-  image: string | null;
-  slider: string[] | null;
-}
+import { Gallery as GalleryType } from "@/utilities/loader";
 
 export default function Gallery() {
-  const [galleries, setGalleries] = useState<Gallery[]>([]);
+  const [galleries, setGalleries] = useState<GalleryType[]>([]);
 
   useEffect(() => {
     async function fetchData() {

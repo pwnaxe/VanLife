@@ -3,21 +3,10 @@ import { getBlogs } from "@/utilities/loader";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-
-interface Blog {
-  id: string;
-  title: string;
-  description: string;
-  date: string;
-  category: string;
-  author: string;
-  image: string | null;
-  imagepost: string | null;
-  role: string;
-}
+import { Blog as BlogType } from "@/utilities/loader";
 
 export default function Blog() {
-  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [blogs, setBlogs] = useState<BlogType[]>([]);
   useEffect(() => {
     async function fetchData() {
       const blogsData = await getBlogs();

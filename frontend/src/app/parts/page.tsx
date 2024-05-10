@@ -2,16 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { getproducts } from "@/utilities/loader";
-
-interface Product {
-  id: string;
-  name: string;
-  price: number;
-  image: string | null;
-}
+import Image from "next/image";
+import { Product as ProductType } from "@/utilities/loader";
 
 export default function ProductsList() {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<ProductType[]>([]);
   useEffect(() => {
     async function fetchData() {
       const productsData = await getproducts();
@@ -30,10 +25,12 @@ export default function ProductsList() {
           {products.map((product) => (
             <a key={product.id} className="group">
               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-                <img
+                <Image
                   src={product.image}
                   alt={product.name}
                   className="h-full w-full object-cover object-center group-hover:opacity-75"
+                  width={300}
+                  height={300}
                 />
               </div>
               <h3 className="mt-4 text-sm text-gray-700">{product.name}</h3>

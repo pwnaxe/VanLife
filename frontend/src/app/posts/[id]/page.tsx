@@ -1,24 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { getBlog } from "@/utilities/loader";
-import {
-  BlocksRenderer,
-  type BlocksContent,
-} from "@strapi/blocks-react-renderer";
-
-interface Blog {
-  id: string;
-  title: string;
-  description: string;
-  date: string;
-  category: string;
-  author: string;
-  image: string | null;
-  post: string;
-  imagepost: string | null;
-  role: string;
-  content?: BlocksContent;
-}
+import { BlocksRenderer } from "@strapi/blocks-react-renderer";
+import Image from "next/image";
+import { Blog as BlogType } from "@/utilities/loader";
 
 interface BlogProps {
   params: {
@@ -27,12 +12,12 @@ interface BlogProps {
 }
 
 export default function Blog({ params }: BlogProps) {
-  const [blog, setBlog] = useState<Blog | null>(null);
+  const [blog, setBlog] = useState<BlogType | null>(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const blogData = await getBlog(params.id);
-        setBlog(blogData as Blog);
+        setBlog(blogData as BlogType);
       } catch (error) {
         console.error("Error fetching blog:", error);
       }
@@ -95,10 +80,12 @@ export default function Blog({ params }: BlogProps) {
           </div>
         </div>
         <div className="-ml-12 -mt-12 p-12 lg:sticky lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden">
-          <img
+          <Image
             className="w-[48rem] max-w-none rounded-xl bg-gray-900 shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem]"
             src={blog.imagepost}
             alt={blog.title}
+            width={684}
+            height={684}
           />
         </div>
         <div className="lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">

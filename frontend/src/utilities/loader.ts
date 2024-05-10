@@ -1,4 +1,5 @@
 import qs from "qs";
+import { type BlocksContent } from "@strapi/blocks-react-renderer";
 
 import {
   flattenAttributes,
@@ -8,19 +9,36 @@ import {
 
 const baseUrl = getStrapiURL();
 
-interface Product {
+export interface Product {
   name: string;
   content: string;
+  id: string;
+  price: number;
+  image: string;
 }
 
-interface Gallery {
+export interface Gallery {
   name: string;
   content: string;
+  id: string;
+  title: string;
+  image: string | null;
+  slider: string[] | null;
 }
 
-interface Blog {
+export interface Blog {
   name: string;
-  content: string;
+  id: string;
+  title: string;
+  description: string;
+  date: string;
+  category: string;
+  author: string;
+  image: string;
+  imagepost: string;
+  role: string;
+  post: BlocksContent;
+  content?: BlocksContent;
 }
 
 export async function getproducts(): Promise<Product[]> {

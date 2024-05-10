@@ -14,6 +14,7 @@ import {
   PhoneIcon,
   PlayCircleIcon,
 } from "@heroicons/react/20/solid";
+import Image from "next/image";
 
 const products = [
   {
@@ -54,7 +55,9 @@ const callsToAction = [
   { name: "Telefon", href: "tel:+48571277223", icon: PhoneIcon },
 ];
 
-function classNames(...classes) {
+function classNames(
+  ...classes: (string | undefined | null | boolean)[]
+): string {
   return classes.filter(Boolean).join(" ");
 }
 
@@ -70,10 +73,12 @@ export default function Example() {
         <div className="flex lg:flex-1">
           <a href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">VanLife</span>
-            <img
+            <Image
               className="h-auto w-44"
-              src="./assets/icon.png"
+              src="/assets/icon.png"
               alt="VanLife"
+              width={176}
+              height={44}
             />
           </a>
         </div>
@@ -190,7 +195,13 @@ export default function Example() {
           <div className="flex items-center justify-between">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">VanLife</span>
-              <img className="h-24 w-24" src="./assets/icon.png" alt="" />
+              <Image
+                className="h-24 w-24"
+                src="/assets/icon.png"
+                alt=""
+                width={96}
+                height={96}
+              />
             </a>
             <button
               type="button"

@@ -1,4 +1,5 @@
 import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -7,10 +8,12 @@ export default function Footer() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
           <div className="mb-6 lg:mb-0 lg:col-span-1 flex flex-col items-center lg:items-start">
             <a href="#" className="flex items-center">
-              <img
+              <Image
                 src="/assets/icon.png"
                 alt="Logo"
                 className="h-8 w-auto mr-3 bg-white rounded-full p-1"
+                width={32}
+                height={32}
               />
               <span className="self-center text-xl font-semibold whitespace-nowrap">
                 VanLife

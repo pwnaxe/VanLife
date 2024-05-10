@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const people = [
   {
     name: "Maciej Kamiński",
@@ -36,10 +38,12 @@ export default function TeamShow() {
                 index % 2 === 0 ? "flex-row" : "flex-row-reverse"
               } items-center py-10`}
             >
-              <img
+              <Image
                 className="flex-shrink-0 h-148 w-72 object-cover rounded-lg shadow-xl"
                 src={person.imageUrl}
                 alt={person.name}
+                width={288}
+                height={296}
               />
               <div
                 className={`ml-16 mr-16 ${
@@ -49,7 +53,7 @@ export default function TeamShow() {
                 <h3 className="text-xl font-semibold leading-7 tracking-tight text-gray-900">
                   {person.name}
                 </h3>
-                <p className="mt-1 text-lg font-semibold leading-6 text-indigo-600">
+                <p className="mt-1 text-lg font-semibold leading-6 text-amber-500">
                   {person.role}
                 </p>
                 <p className="mt-4 text-base text-gray-500">
