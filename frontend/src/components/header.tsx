@@ -74,7 +74,6 @@ export default function Example() {
           <a href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">VanLife</span>
             <Image
-              className="h-auto w-44"
               src="/assets/icon.png"
               alt="VanLife"
               width={176}

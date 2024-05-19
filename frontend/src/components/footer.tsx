@@ -69,7 +69,7 @@ export default function Footer() {
         </div>
         <div className="border-t border-gray-700 mt-10 pt-10 text-sm text-center">
           <p className="text-gray-400">
-            &copy; 2024 VanLife, Tanosmotorsport sp. z o.o. All rights reserved.
+            &copy; 2024 VanLife, Tanosmotorsport sp. z o.o. <a href='/policy'>All rights reserved.</a>
           </p>
         </div>
       </div>

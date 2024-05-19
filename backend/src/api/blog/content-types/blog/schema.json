@@ -4,8 +4,7 @@
   "info": {
     "singularName": "blog",
     "pluralName": "blogs",
-    "displayName": "blog",
-    "description": ""
+    "displayName": "Blog"
   },
   "options": {
     "draftAndPublish": true
@@ -26,6 +25,9 @@
     },
     "author": {
       "type": "string"
+    },
+    "post": {
+      "type": "blocks"
     },
     "role": {
       "type": "string"
@@ -49,9 +51,6 @@
       ],
       "type": "media",
       "multiple": false
-    },
-    "post": {
-      "type": "blocks"
     }
   }
 }

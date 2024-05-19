@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Switch } from "@headlessui/react";
+import emailjs from 'emailjs-com';
 
 function classNames(
   ...classes: (string | undefined | null | boolean)[]
@@ -12,6 +13,43 @@ function classNames(
 
 export default function Contact() {
   const [agreed, setAgreed] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    company: '',
+    email: '',
+    phoneNumber: '',
+    message: '',
+  });
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    if (!agreed) {
+      alert('Musisz zaakceptować politykę prywatności, aby wysłać wiadomość.');
+      return;
+    }
+
+    emailjs.send(
+      'YOUR_SERVICE_ID', 
+      'YOUR_TEMPLATE_ID', 
+      formData, 
+      'YOUR_USER_ID'
+    ).then((response) => {
+      console.log('SUCCESS!', response.status, response.text);
+      alert('Wiadomość została wysłana!');
+    }).catch((error) => {
+      console.log('FAILED...', error);
+      alert('Wystąpił błąd podczas wysyłania wiadomości.');
+    });
+  }
 
   return (
     <div className="isolate bg-white px-6 py-24 sm:py-32 lg:px-8">
@@ -21,29 +59,33 @@ export default function Contact() {
         </h2>
         <p className="mt-6 text-lg leading-8 text-gray-600">
           Biuro obsługi klienta czeka na Twoje pytania i sugestie. Jesteśmy
-          dostępni od poniedziałku do piątku w godzinach 8:00-16:00. Możesz
-          również skontaktować się z nami mailowo lub telefonicznie. Nr
-          telefonu: 123 456 789 Adres e-mail: biuro@sdasdas.pl
+          dostępni od poniedziałku do piątku w godzinach 8:00-20:00. Możesz
+          również skontaktować się z nami mailowo lub telefonicznie.
+          <br/>
+          <a href='tel:+48571277223'>Telefon : +48 571 277 223</a>
+          <br/>
+          <a href='contact@tanosmotorsport.pl'>Email: contact@tanosmotorsport.pl</a>
         </p>
       </div>
       <form
-        action="#"
-        method="POST"
+        onSubmit={handleSubmit}
         className="mx-auto mt-16 max-w-xl sm:mt-20"
       >
         <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
           <div>
             <label
-              htmlFor="first-name"
+              htmlFor="firstName"
               className="block text-sm font-semibold leading-6 text-gray-900"
             >
-              First name
+              Imię
             </label>
             <div className="mt-2.5">
               <input
                 type="text"
-                name="first-name"
-                id="first-name"
+                name="firstName"
+                id="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
                 autoComplete="given-name"
                 className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:text-sm sm:leading-6"
               />
@@ -51,16 +93,18 @@ export default function Contact() {
           </div>
           <div>
             <label
-              htmlFor="last-name"
+              htmlFor="lastName"
               className="block text-sm font-semibold leading-6 text-gray-900"
             >
-              Last name
+              Nazwisko
             </label>
             <div className="mt-2.5">
               <input
                 type="text"
-                name="last-name"
-                id="last-name"
+                name="lastName"
+                id="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
                 autoComplete="family-name"
                 className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:text-sm sm:leading-6"
               />
@@ -71,13 +115,15 @@ export default function Contact() {
               htmlFor="company"
               className="block text-sm font-semibold leading-6 text-gray-900"
             >
-              Company
+              Firma
             </label>
             <div className="mt-2.5">
               <input
                 type="text"
                 name="company"
                 id="company"
+                value={formData.company}
+                onChange={handleChange}
                 autoComplete="organization"
                 className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:text-sm sm:leading-6"
               />
@@ -95,6 +141,8 @@ export default function Contact() {
                 type="email"
                 name="email"
                 id="email"
+                value={formData.email}
+                onChange={handleChange}
                 autoComplete="email"
                 className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:text-sm sm:leading-6"
               />
@@ -102,15 +150,15 @@ export default function Contact() {
           </div>
           <div className="sm:col-span-2">
             <label
-              htmlFor="phone-number"
+              htmlFor="phoneNumber"
               className="block text-sm font-semibold leading-6 text-gray-900"
             >
-              Phone number
+              Telefon kontaktowy
             </label>
             <div className="relative mt-2.5">
               <div className="absolute inset-y-0 left-0 flex items-center">
                 <label htmlFor="country" className="sr-only">
-                  Country
+                  Państwo lub Rejon
                 </label>
                 <select
                   id="country"
@@ -128,8 +176,10 @@ export default function Contact() {
               </div>
               <input
                 type="tel"
-                name="phone-number"
-                id="phone-number"
+                name="phoneNumber"
+                id="phoneNumber"
+                value={formData.phoneNumber}
+                onChange={handleChange}
                 autoComplete="tel"
                 className="block w-full rounded-md border-0 px-3.5 py-2 pl-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:text-sm sm:leading-6"
               />
@@ -140,15 +190,16 @@ export default function Contact() {
               htmlFor="message"
               className="block text-sm font-semibold leading-6 text-gray-900"
             >
-              Message
+              Treść wiadomości:
             </label>
             <div className="mt-2.5">
               <textarea
                 name="message"
                 id="message"
+                value={formData.message}
+                onChange={handleChange}
                 rows={4}
                 className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:text-sm sm:leading-6"
-                defaultValue={""}
               />
             </div>
           </div>
@@ -162,7 +213,7 @@ export default function Contact() {
                   "flex w-8 flex-none cursor-pointer rounded-full p-px ring-1 ring-inset ring-gray-900/5 transition-colors duration-200 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400"
                 )}
               >
-                <span className="sr-only">Agree to policies</span>
+                <span className="sr-only">Zgoda na politykę prywatności</span>
                 <span
                   aria-hidden="true"
                   className={classNames(
@@ -173,9 +224,9 @@ export default function Contact() {
               </Switch>
             </div>
             <Switch.Label className="text-sm leading-6 text-gray-600">
-              By selecting this, you agree to our{" "}
+              Zaznaczając tutaj, zgadzasz się z naszą {" "}
               <a href="/policy" className="font-semibold text-amber-600">
-                privacy policy
+              polityką prywatności
               </a>
               .
             </Switch.Label>
@@ -186,7 +237,7 @@ export default function Contact() {
             type="submit"
             className="block w-full rounded-md bg-amber-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-500"
           >
-            Lets talk
+            Wyślij Wiadomość!
           </button>
         </div>
       </form>

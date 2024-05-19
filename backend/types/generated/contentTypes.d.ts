@@ -793,8 +793,7 @@ export interface ApiBlogBlog extends Schema.CollectionType {
   info: {
     singularName: 'blog';
     pluralName: 'blogs';
-    displayName: 'blog';
-    description: '';
+    displayName: 'Blog';
   };
   options: {
     draftAndPublish: true;
@@ -805,10 +804,10 @@ export interface ApiBlogBlog extends Schema.CollectionType {
     date: Attribute.DateTime;
     category: Attribute.String;
     author: Attribute.String;
+    post: Attribute.Blocks;
     role: Attribute.String;
     image: Attribute.Media;
     imagepost: Attribute.Media;
-    post: Attribute.Blocks;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -825,13 +824,14 @@ export interface ApiGalleryGallery extends Schema.CollectionType {
     singularName: 'gallery';
     pluralName: 'galleries';
     displayName: 'Gallery';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    image: Attribute.Media;
     slider: Attribute.Media;
+    image: Attribute.Media;
     title: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -851,43 +851,22 @@ export interface ApiGalleryGallery extends Schema.CollectionType {
   };
 }
 
-export interface ApiLogoLogo extends Schema.SingleType {
-  collectionName: 'logos';
-  info: {
-    singularName: 'logo';
-    pluralName: 'logos';
-    displayName: 'logo';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    logo: Attribute.Media;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::logo.logo', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::logo.logo', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
 export interface ApiProductProduct extends Schema.CollectionType {
   collectionName: 'products';
   info: {
     singularName: 'product';
     pluralName: 'products';
-    displayName: 'product';
+    displayName: 'Product';
     description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    name: Attribute.String;
-    price: Attribute.Integer;
     image: Attribute.Media;
+    price: Attribute.Integer;
+    name: Attribute.String;
+    link: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -926,7 +905,6 @@ declare module '@strapi/types' {
       'plugin::i18n.locale': PluginI18NLocale;
       'api::blog.blog': ApiBlogBlog;
       'api::gallery.gallery': ApiGalleryGallery;
-      'api::logo.logo': ApiLogoLogo;
       'api::product.product': ApiProductProduct;
     }
   }
