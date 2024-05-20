@@ -4,14 +4,14 @@ const people = [
   {
     name: "Maciej Kamiński",
     role: "Co-Founder / CEO",
-    imageUrl: "https://i.imgur.com/LIpWU5v.png",
+    imageUrl: "http://www.tanosmotorsport.pl/assets/tanos-049.jpg",
     description:
       "Maciej jest odpowiedzialny za rozwój produktu i marketing. Wcześniej pracował w branży IT, gdzie zdobył doświadczenie w zarządzaniu projektami i marketingu. W wolnych chwilach lubi podróżować i jeździć na rowerze.",
   },
   {
     name: "Paweł Gołębiewski",
     role: "Co-Founder / CEO",
-    imageUrl: "https://i.imgur.com/JARzkg3.png",
+    imageUrl: "http://www.tanosmotorsport.pl/assets/tanos-037.jpg",
     description:
       "Paweł jest odpowiedzialny za rozwój produktu i marketing. Wcześniej pracował w branży IT, gdzie zdobył doświadczenie w zarządzaniu projektami i marketingu. W wolnych chwilach lubi podróżować i jeździć na rowerze.",
   },
@@ -26,17 +26,25 @@ export default function TeamShow() {
             Poznaj nas bliżej
           </h2>
           <p className="mt-6 text-lg leading-8 text-gray-600">
-            Nasz zespół łączy pasję do motoryzacji z profesjonalizmem. Jesteśmy
-            tutaj, aby pomóc Ci przekształcić Twój bus w idealny kamper.
+            W Tanos Motorsport zajmujemy się dostarczaniem i montowaniem najwyższej jakości produktów, aby poprawić zarówno osiągi jak i niezawodność w sportach motorowych i na drogach. Ponadto podejmujemy się kompleksowych modyfikacji aut. Każdego klienta traktujemy indywidualnie, a każdy projekt wyceniamy opierając się na oczekiwaniach klienta, wybranych lub sugerowanych częściach i stopniu modyfikacji.
+          </p>            
+          <p className="mt-6 text-lg leading-8 text-gray-600">
+            Zapraszamy na naszą stronę na Facebooku, gdzie możecie Państwo śledzić nasze poczynania na bieżąco. Korzystając z najnowszych technologii maszyn CNC i skanowania 3D, budujemy samochody spełniając marzenia naszych klientów i rozbudowując nasz własny park maszynowy.
+          </p>
+          <p className="mt-6 text-lg leading-8 text-gray-600">
+            Pracujemy i żyjemy według zasady “Sky is the limit”, wszystko możemy osiągnąć, zbudować i zrobić, wyobraźnia klienta jest jedynym naszym ograniczeniem.
+          </p>
+          <p className="mt-6 text-2xl font-bold text-amber-500 leading-8">
+            Pozdrawiamy <br /><br /> Paweł Gołębiewski i Maciej Kamiński
           </p>
         </div>
         <div className="mt-12">
           {people.map((person, index) => (
             <div
               key={person.name}
-              className={`flex ${
-                index % 2 === 0 ? "flex-row" : "flex-row-reverse"
-              } items-center py-10`}
+              className={`flex flex-col items-center sm:flex-row ${
+                index % 2 === 0 ? "sm:flex-row" : "sm:flex-row-reverse"
+              } py-10`}
             >
               <Image
                 className="flex-shrink-0 h-148 w-72 object-cover rounded-lg shadow-xl"
@@ -46,8 +54,8 @@ export default function TeamShow() {
                 height={296}
               />
               <div
-                className={`ml-16 mr-16 ${
-                  index % 2 === 0 ? "mr-auto" : "ml-auto"
+                className={`mt-6 text-center sm:text-left sm:mt-0 sm:ml-16 sm:mr-16 ${
+                  index % 2 === 0 ? "sm:mr-auto" : "sm:ml-auto"
                 } max-w-md`}
               >
                 <h3 className="text-xl font-semibold leading-7 tracking-tight text-gray-900">

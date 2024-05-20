@@ -38,10 +38,10 @@ export default function Contact() {
     }
 
     emailjs.send(
-      'YOUR_SERVICE_ID', 
-      'YOUR_TEMPLATE_ID', 
+      'service_k0fqs4d', 
+      'template_hiizuhn', 
       formData, 
-      'YOUR_USER_ID'
+      'kXa7UdfIOeGjqbTB3'
     ).then((response) => {
       console.log('SUCCESS!', response.status, response.text);
       alert('Wiadomość została wysłana!');
